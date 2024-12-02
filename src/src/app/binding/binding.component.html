@@ -1,0 +1,8 @@
+<img src="{{imageUrl}}" alt="">
+<h4>{{pageTitle}}</h4>
+
+<button (click)="changeTitle()" [disabled]="isDisabled"> Click Me</button>
+<input type="text" [(ngModel)]="username"  />
+
+<h4>{{username}}</h4>
+

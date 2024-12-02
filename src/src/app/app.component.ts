@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
-
+import { Component } from "@angular/core";
 @Component({
-  selector: 'app-root',
+  selector:'app-root',
   templateUrl: './app.component.html',
-  standalone: false,
-  styleUrl: './app.component.css'
+  standalone:false
 })
-export class AppComponent {
-  title = 'src';
+export class AppComponent{
 }
+
+
+// import { Component } from '@angular/core';
+
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   standalone: false,
+//   styleUrl: './app.component.css'
+// })
+// export class AppComponent {
+//   title = 'src';
+// }

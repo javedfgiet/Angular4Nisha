@@ -1,0 +1,21 @@
+<h4>Plese Select Counry to see code</h4>
+select Country :
+<select (change)="choice($any($event.target).value)">
+    <option *ngFor="let c of countries" [value]="c.code">{{c.country}}</option>
+</select>
+
+<div [ngSwitch]="selectedCountry">
+    <div *ngSwitchCase="'ind'">
+        <h4>Inidan Calling Code : + 91</h4>
+    </div>
+    <div *ngSwitchCase="'uae'">
+        <h4>UAE calling Code : +97</h4>
+    </div>
+    <div *ngSwitchCase="'uk'">
+        <h4>UK Calling Code +01</h4>
+    </div>
+    <div *ngSwitchDefault>
+        <h4>Select Your Country First</h4>
+
+    </div>
+</div>
