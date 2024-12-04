@@ -1,0 +1,42 @@
+<h1>Employee List</h1>
+<div *ngIf="employees.length>0;else nousers">
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Website</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let employee of employees; trackBy:trackByEmpCode'>
+
+        <td>{{employee.id }}</td>
+        <td>{{employee.name | uppercase}}</td>
+        <td>{{employee.username}}</td>
+        <td>{{employee.website }}</td>
+        <td>{{employee.email}}</td>
+      </tr>
+      <tr *ngIf="!employees || employees.length==0">
+        <td colspan="5"> No Employee To Display</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+
+<ng-template #nousers>
+  <p class="alert alert-danger text-center">{{statusMessage}}</p>
+</ng-template>
+<!-- <div>
+    <pre>
+    {{employees|json}}</pre>
+  </div>
+  <button type="button" (click)="getEmployees()" class="btn btn-primary">Refresh Employee</button> -->

@@ -7,6 +7,14 @@ import { AppComponent } from './app.component';
 import { BindingComponent } from './binding/binding.component';
 import { ListEmployeeComponent } from './Employees/list-employee/list-employee.component';
 import { CountryCodeComponent } from './Switch/country-code/country-code.component';
+import { ParentComponent } from './Nested/parent/parent.component';
+import { ChildComponent } from './Nested/child/child.component';
+import { EmployeeTitlePipePipe } from './Pipes/employee-title-pipe.pipe';
+import { UsersService } from './services/users.service';
+import { provideHttpClient } from '@angular/common/http';
+import { UserListComponent } from './Users/user-list/user-list.component';
+
+
 
 
 @NgModule({
@@ -14,14 +22,19 @@ import { CountryCodeComponent } from './Switch/country-code/country-code.compone
     AppComponent,
     BindingComponent,
     ListEmployeeComponent,
-    CountryCodeComponent
+    CountryCodeComponent,
+    ParentComponent,
+    ChildComponent,
+    EmployeeTitlePipePipe,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+  
   ],
-  providers: [],
+  providers: [UsersService, provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,10 +11,10 @@
   <tbody>
     <tr *ngFor='let employee of employees; trackBy:trackByEmpCode'>
 
-      <td>{{employee.code}}</td>
-      <td>{{employee.name}}</td>
+      <td>{{employee.code | uppercase}}</td>
+      <td>{{employee.name | uppercase|employeeTitle:employee.gender}}</td>
       <td>{{employee.gender}}</td>
-      <td>{{employee.annualSalary}}</td>
+      <td>{{employee.annualSalary | currency:'INR'}}</td>
       <td>{{employee.dateOfBirth}}</td>
     </tr>
     <tr *ngIf="!employees || employees.length==0">
@@ -24,4 +24,8 @@
 
   </tbody>
 </table>
+<div>
+  <pre>
+  {{employees|json}}</pre>
+</div>
 <button type="button" (click)="getEmployees()" class="btn btn-primary">Refresh Employee</button>

@@ -1,0 +1,9 @@
+<div class="container-fluid" style="background-color:gray; padding: 20;">
+   <h1 class="text-center"> Parent Component - Root Componnet</h1>
+
+   <app-child [uname]="userName" (notify)="ShowChildMesage($event)"></app-child>
+   
+ <br>
+  <div align="center">{{message}}</div>
+  </div>
+
