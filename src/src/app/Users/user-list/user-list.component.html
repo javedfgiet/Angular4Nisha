@@ -15,7 +15,9 @@
     <tbody>
       <tr *ngFor='let employee of employees; trackBy:trackByEmpCode'>
 
-        <td>{{employee.id }}</td>
+        <td>
+         <a [routerLink]="['/user',employee.id]"> {{employee.id }}</a>
+        </td>
         <td>{{employee.name | uppercase}}</td>
         <td>{{employee.username}}</td>
         <td>{{employee.website }}</td>
