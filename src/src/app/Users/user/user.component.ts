@@ -20,8 +20,8 @@ export class UserComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     this.user.getUsers(id).subscribe({
       next: response => this.users = response as any[],
-      error: err => this.statusMessage="Something bad happened; please try again later.",
-      complete:()=>this.statusMessage="Completed"
+      error: err => this.statusMessage = "Something bad happened; please try again later.",
+      complete: () => this.statusMessage = "Completed"
     })
   }
 

@@ -17,14 +17,35 @@ import { UserListComponent } from './Users/user-list/user-list.component';
 import { AboutComponent } from './Users/about/about.component';
 import { ContactComponent } from './Users/contact/contact.component';
 import { UserComponent } from './Users/user/user.component';
+import { AddressComponent } from './Users/address/address.component';
+import { CompanyComponent } from './Users/company/company.component';
+import { FeedbackComponent } from './Users/feedback/feedback.component';
+import { LocationComponent } from './Users/location/location.component';
+import { AuthGuard } from './RGuard/auth.guard';
+import { AuthService } from './services/auth.service';
+import { AdminGuard } from './RGuard/admin.guard';
 
 const route: Routes = [
-  {path:'',redirectTo:'users',pathMatch:'full'},
-  { path: 'users', component: UserListComponent },
-  {path:'user/:id',component:UserComponent},
-  { path: 'about', component: AboutComponent },
+  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
+  {
+    path: 'user/:id', component: UserComponent,
+    canActivateChild: [AdminGuard],
+    children: [
+      { path: 'address', component: AddressComponent, pathMatch: 'full' },
+      { path: 'company', component: CompanyComponent }
+    ]
+  },
+  {
+    path: 'about', component: AboutComponent,
+    
+    children: [
+      { path: 'location', outlet: 'map', component: LocationComponent },
+      { path: "feedback", outlet: 'feed', component: FeedbackComponent }
+    ]
+  },
   { path: 'contact', component: ContactComponent },
-  {path:'**',redirectTo:'users'}
+  { path: '**', redirectTo: 'users' }
 
 ]
 
@@ -41,7 +62,11 @@ const route: Routes = [
     UserListComponent,
     AboutComponent,
     ContactComponent,
-    UserComponent
+    UserComponent,
+    AddressComponent,
+    CompanyComponent,
+    FeedbackComponent,
+    LocationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +75,7 @@ const route: Routes = [
     RouterModule.forRoot(route)
 
   ],
-  providers: [UsersService, provideHttpClient()],
+  providers: [UsersService, provideHttpClient(), AuthGuard, AdminGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
