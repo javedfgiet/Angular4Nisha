@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,31 +24,10 @@ import { LocationComponent } from './Users/location/location.component';
 import { AuthGuard } from './RGuard/auth.guard';
 import { AuthService } from './services/auth.service';
 import { AdminGuard } from './RGuard/admin.guard';
-
-const route: Routes = [
-  { path: '', redirectTo: 'users', pathMatch: 'full' },
-  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
-  {
-    path: 'user/:id', component: UserComponent,
-    canActivateChild: [AdminGuard],
-    children: [
-      { path: 'address', component: AddressComponent, pathMatch: 'full' },
-      { path: 'company', component: CompanyComponent }
-    ]
-  },
-  {
-    path: 'about', component: AboutComponent,
-    
-    children: [
-      { path: 'location', outlet: 'map', component: LocationComponent },
-      { path: "feedback", outlet: 'feed', component: FeedbackComponent }
-    ]
-  },
-  { path: 'contact', component: ContactComponent },
-  { path: '**', redirectTo: 'users' }
-
-]
-
+import { AddUserComponent } from './Users/add-user/add-user.component';
+import { unsavedChangesGuard } from './RGuard/unsaved-changes.guard';
+import { resolveGuard } from './RGuard/resolve.guard';
+import { RxjsComponent } from './Subjects/rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -66,16 +45,18 @@ const route: Routes = [
     AddressComponent,
     CompanyComponent,
     FeedbackComponent,
-    LocationComponent
+    LocationComponent,
+    AddUserComponent,
+    RxjsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(route)
-
+    ReactiveFormsModule
   ],
-  providers: [UsersService, provideHttpClient(), AuthGuard, AdminGuard, AuthService],
+  providers: [UsersService, AuthService, provideHttpClient(),
+    AuthGuard, AdminGuard, unsavedChangesGuard, resolveGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,6 @@
 <h1>Employee List</h1>
+
+<a class="btn btn-success" [routerLink]="['/adduser']">Add User</a>
 <div *ngIf="employees.length>0;else nousers">
 
 
@@ -16,7 +18,7 @@
       <tr *ngFor='let employee of employees; trackBy:trackByEmpCode'>
 
         <td>
-         <a [routerLink]="['/user',employee.id]"> {{employee.id }}</a>
+          <a [routerLink]="['/user',employee.id]"> {{employee.id }}</a>
         </td>
         <td>{{employee.name | uppercase}}</td>
         <td>{{employee.username}}</td>
