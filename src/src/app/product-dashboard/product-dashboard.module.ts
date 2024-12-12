@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductWidgetComponent } from './product-widget/product-widget.component';
 
 const routes:Routes=[
   {path:'',component:ProductDashboardComponent}
@@ -9,7 +10,8 @@ const routes:Routes=[
 
 @NgModule({
   declarations: [
-    ProductDashboardComponent
+    ProductDashboardComponent,
+    ProductWidgetComponent
   ],
   imports: [
     CommonModule,

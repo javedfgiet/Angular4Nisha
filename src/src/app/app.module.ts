@@ -12,7 +12,7 @@ import { ParentComponent } from './Nested/parent/parent.component';
 import { ChildComponent } from './Nested/child/child.component';
 import { EmployeeTitlePipePipe } from './Pipes/employee-title-pipe.pipe';
 import { UsersService } from './services/users.service';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { UserListComponent } from './Users/user-list/user-list.component';
 import { AboutComponent } from './Users/about/about.component';
 import { ContactComponent } from './Users/contact/contact.component';
@@ -28,6 +28,10 @@ import { AddUserComponent } from './Users/add-user/add-user.component';
 import { unsavedChangesGuard } from './RGuard/unsaved-changes.guard';
 import { resolveGuard } from './RGuard/resolve.guard';
 import { RxjsComponent } from './Subjects/rxjs/rxjs.component';
+import { NotificationBoardComponent } from './Users/notification-board/notification-board.component';
+import { ViewChildComponent } from './Users/view-child/view-child.component';
+import { CounterComponent } from './Users/counter/counter.component';
+import { headersInterceptor } from './headers.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,10 @@ import { RxjsComponent } from './Subjects/rxjs/rxjs.component';
     FeedbackComponent,
     LocationComponent,
     AddUserComponent,
-    RxjsComponent
+    RxjsComponent,
+    NotificationBoardComponent,
+    ViewChildComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
@@ -55,8 +62,11 @@ import { RxjsComponent } from './Subjects/rxjs/rxjs.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UsersService, AuthService, provideHttpClient(),
-    AuthGuard, AdminGuard, unsavedChangesGuard, resolveGuard],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: headersInterceptor, multi: true },
+    UsersService, AuthService, provideHttpClient(withInterceptorsFromDi()),
+    AuthGuard, AdminGuard, unsavedChangesGuard, resolveGuard
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

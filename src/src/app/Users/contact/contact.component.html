@@ -1,1 +1,7 @@
-<p>contact works!</p>
+<p>
+    Enter Message : <input type="text" #messag />
+    <button (click)="SendMessage(messag)">Send Messgae</button>
+</p>
+<p>
+    {{currentMessage}}
+</p>
