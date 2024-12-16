@@ -32,6 +32,8 @@ import { NotificationBoardComponent } from './Users/notification-board/notificat
 import { ViewChildComponent } from './Users/view-child/view-child.component';
 import { CounterComponent } from './Users/counter/counter.component';
 import { headersInterceptor } from './headers.interceptor';
+import { HooksComponent } from './hooks/hooks/hooks.component';
+import { HookchildComponent } from './hooks/hooks/hookchild/hookchild.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { headersInterceptor } from './headers.interceptor';
     RxjsComponent,
     NotificationBoardComponent,
     ViewChildComponent,
-    CounterComponent
+    CounterComponent,
+    HooksComponent,
+    HookchildComponent
   ],
   imports: [
     BrowserModule,
